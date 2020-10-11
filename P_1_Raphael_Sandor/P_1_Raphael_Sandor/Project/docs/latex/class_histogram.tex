@@ -1,0 +1,115 @@
+\hypertarget{class_histogram}{}\section{Histogram Class Reference}
+\label{class_histogram}\index{Histogram@{Histogram}}
+
+
+manages all the data of histograms.  
+
+
+
+
+{\ttfamily \#include $<$histogram.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_histogram_a1fdadf17fc180d746c541b879c93335d}{Histogram} (ifstream $\ast$data)
+\item 
+void \hyperlink{class_histogram_adb7101f7cc831bc8265ebd5d56b3b553}{find\+Min\+Max} (ifstream $\ast$data, int size, double \&min, double \&max)
+\item 
+void \hyperlink{class_histogram_a0554e0adfcd84b7524d27079d7f23729}{calculate\+Bins} (ifstream $\ast$data, double $\ast$bin, int size\+Of\+Bin, double \&range)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+manages all the data of histograms. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_histogram_a1fdadf17fc180d746c541b879c93335d}\label{class_histogram_a1fdadf17fc180d746c541b879c93335d}} 
+\index{Histogram@{Histogram}!Histogram@{Histogram}}
+\index{Histogram@{Histogram}!Histogram@{Histogram}}
+\subsubsection{\texorpdfstring{Histogram()}{Histogram()}}
+{\footnotesize\ttfamily Histogram\+::\+Histogram (\begin{DoxyParamCaption}\item[{ifstream $\ast$}]{data }\end{DoxyParamCaption})}
+
+Loads the data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ ifstream to data file.\\
+\hline
+\end{DoxyParams}
+Setups up the histogram.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ data \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_histogram_a0554e0adfcd84b7524d27079d7f23729}\label{class_histogram_a0554e0adfcd84b7524d27079d7f23729}} 
+\index{Histogram@{Histogram}!calculate\+Bins@{calculate\+Bins}}
+\index{calculate\+Bins@{calculate\+Bins}!Histogram@{Histogram}}
+\subsubsection{\texorpdfstring{calculate\+Bins()}{calculateBins()}}
+{\footnotesize\ttfamily void Histogram\+::calculate\+Bins (\begin{DoxyParamCaption}\item[{ifstream $\ast$}]{data,  }\item[{double $\ast$}]{bin,  }\item[{int}]{size\+Of\+Bin,  }\item[{double \&}]{range }\end{DoxyParamCaption})}
+
+Calculate the bins of the histogram, number of points in each bin. Calculate the density of each bin.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ data file \\
+\hline
+{\em bin} & -\/ array of doubles  -\/ number of elements in array. \\
+\hline
+{\em range} & -\/ range of the data.\\
+\hline
+\end{DoxyParams}
+Handles the data for each bin of the histogram.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ data file \\
+\hline
+{\em bin} & -\/ array of doubles  -\/ number of elements in array. \\
+\hline
+{\em range} & -\/ range of the data. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_histogram_adb7101f7cc831bc8265ebd5d56b3b553}\label{class_histogram_adb7101f7cc831bc8265ebd5d56b3b553}} 
+\index{Histogram@{Histogram}!find\+Min\+Max@{find\+Min\+Max}}
+\index{find\+Min\+Max@{find\+Min\+Max}!Histogram@{Histogram}}
+\subsubsection{\texorpdfstring{find\+Min\+Max()}{findMinMax()}}
+{\footnotesize\ttfamily void Histogram\+::find\+Min\+Max (\begin{DoxyParamCaption}\item[{ifstream $\ast$}]{data,  }\item[{int}]{size,  }\item[{double \&}]{min,  }\item[{double \&}]{max }\end{DoxyParamCaption})}
+
+Finds min and max for data set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ data file. \\
+\hline
+{\em size} & -\/ size of file \\
+\hline
+{\em min} & -\/ minimum value of the data set \\
+\hline
+{\em max} & -\/ maximum value of the data set\\
+\hline
+\end{DoxyParams}
+Finds the min and max value from data set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ data file. \\
+\hline
+{\em size} & -\/ size of data set. \\
+\hline
+{\em min} & -\/ min value of data set \\
+\hline
+{\em max} & -\/ max value of data set \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+P\+\_\+1\+\_\+\+Raphael\+\_\+\+Sandor/\+Project/include/\hyperlink{histogram_8h}{histogram.\+h}\item 
+P\+\_\+1\+\_\+\+Raphael\+\_\+\+Sandor/\+Project/src/\hyperlink{histogram_8cpp}{histogram.\+cpp}\end{DoxyCompactItemize}
