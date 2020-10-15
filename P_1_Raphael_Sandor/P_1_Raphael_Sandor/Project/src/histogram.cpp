@@ -63,8 +63,7 @@ Histogram::Histogram(ifstream* data)
     // pre calculate the bins before we need them
     calculateBins(bins30, 29, range);
     calculateBins(bins40, 39, range);
-    //  cout << "done calc" << endl;
-    //calculateBins(data, bins50, 50, range);
+    calculateBins(bins50, 49, range);
 
 }
 
@@ -92,60 +91,10 @@ void Histogram::findMinMax(ifstream* data, int size, double &min, double &max)
     }
 }
 
-/**
- * Handles the data for each bin of the histogram.
- * 
- * \param bin	- array of doubles
- * \sizeOfBin	- number of elements in array.
- * \param range	- range of the data.
- */
-/*
-void Histogram::calculateBins(double *bin, int sizeOfBins, double range)
-{
-    int bktIdx = 0;
-    double width = range / ((double)sizeOfBins + 1 );
-    cout << "width  " << width << endl;
-    double bucket;
-    double test = 0.0;
-
-    for (int i = 0; i < points; i++)
-    {
-        double pt = dataSet[i];
-        bucket = min + (double)(width * bktIdx);
-
-        if ( pt >=  bucket && pt < bucket + width) 
-        {
-            bin[bktIdx] = bin[bktIdx] + 1;
-        }
-        else
-        {
-            while (pt > bucket && pt >= bucket + width)
-            {
-                bucket = bucket + width;
-                bktIdx++;
-            }
-            bin[bktIdx] = bin[bktIdx] + 1;
-        }
-       
-    }
-    
-    // recalc density;
-    //cout << " boundary" << boundary << endl;
-    //cout << "min " << min << endl; 
-    //cout << "max " << max << endl;
-    //cout << "points " << points << endl;
-    for (int x = 0; x < sizeOfBins+1; x++) {
-       // test = test + bin[x];
-       cout << x << " " << min+(width*x) << " " <<  bin[x] <<endl;
-    }   
-}*/
-
-
 void Histogram::calculateBins(double* bin, int sizeOfBins, double range)
 {
 
     double width = range / ((double)sizeOfBins + 1);
-    cout << "width  " << width << endl;
 
     int binIndex = 0;
     double boundary = min + width;
@@ -156,14 +105,11 @@ void Histogram::calculateBins(double* bin, int sizeOfBins, double range)
         {
             boundary = boundary + width;
             binIndex++;
-            // cout << "Data " << dataSet[i] << " boundary " << boundary << endl;;
-
         }
 
         if (dataSet[i] <= boundary)
         {
             bin[binIndex] = bin[binIndex] + 1;
-
         }
         else if (binIndex == sizeOfBins)
         {
@@ -171,13 +117,64 @@ void Histogram::calculateBins(double* bin, int sizeOfBins, double range)
         }
     }
 
-    // recalc density;
     //cout << " boundary" << boundary << endl;
     //cout << "min " << min << endl; 
     //cout << "max " << max << endl;
     //cout << "points " << points << endl;
+
+    int selected; 
+    if (sizeOfBins + 1 == 30) { selected = 0; }
+    else if (sizeOfBins + 1 == 40) { selected = 1;}
+    else { selected = 2; }
+
+   // Calc Max density;
     for (int x = 0; x < sizeOfBins + 1; x++) {
-        // test = test + bin[x];
-         cout << x << " " << min+(width*x) <<  " " <<  bin[x] << " " << (bin[x]/width)/points <<endl;
+        double binDesnsity = (double)((bin[x] / width) / points);
+        if (binDesnsity > maxDensity[selected])
+            maxDensity[selected] = binDesnsity;
+        bin[x] = binDesnsity;
     }
 }
+
+double Histogram::getMaxDensity(int bins) {
+    if (bins == 30) {
+        return maxDensity[0];
+    }
+    else if (bins == 40) {
+        return maxDensity[1];
+    }
+    else {
+        return maxDensity[2];
+    }
+}
+
+double Histogram::getMin()
+{
+    return min;
+}
+
+double Histogram::getMax()
+{
+    return max;
+}
+
+double * Histogram::getBins30() {
+    return bins30;
+}
+
+double* Histogram::getBins40() {
+    return bins40;
+}
+
+double* Histogram::getBins50() {
+    return bins50;
+}
+
+int Histogram::getPoints() {
+    return points;
+}
+
+double Histogram::getWidth(int binSize) {
+   return (double) range / binSize;
+}
+

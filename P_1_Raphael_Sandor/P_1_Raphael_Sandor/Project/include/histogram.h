@@ -7,23 +7,34 @@
 class Histogram
 {
 	private:
+
+		// Min, Max, and Range of data points
 		double min		= 100.0;
 		double max		= -100.0;
 		double range	= 0.00;
+		// Each bins max density. 
+		// maxDensity[0] is for bins30[]
+		// maxDesnity[1] is for bins40[] etc.
+		double maxDensity[3] = { 0 };
+		// Number of points
 		int points		= 0;
+		// Read in data set for which the histogram belongs.
 		double* dataSet;
+		// Calculated bins. 
 		double bins30[30] = {0};
 		double bins40[40] = {0};
 		double bins50[50] = {0};
+		int bigest30, bigest40, bigest50 = 0;
 
 	public:
 
 		/**
-		 * Loads the data.
+		 * Constructor that intializes histograms.
+		 * Loads the data, and calls functions that set up histograms.
 		 * 
 		 * \param data - ifstream to data file.
 		 */
-		Histogram::Histogram(ifstream *data);
+		Histogram(ifstream *data);
 
 		/**
 		 * Finds min and max for data set.
@@ -47,13 +58,26 @@ class Histogram
 		void calculateBins(double* bin, int sizeOfBin, double range);
 
 		/**
-		 * A divide and conquer algorithm to find which index to put the point.
+		 * Returns the max density..
 		 * 
-		 * \param bins
-		 * \param dataPt
-		 * \param size
-		 * \return 
+		 * \return the maximum density based on the number of bins.
 		 */
-		int divideAndConquer(double * bins, double dataPt, int left, int right);
+		double getMaxDensity(int bins);
+
+		double getMin();
+
+		double getMax();
+
+		double* getBins30();
+
+		double* getBins40();
+
+		double* getBins50();
+
+		int getPoints();
+
+		double getWidth(int binSize);
+
+		
 };
 

@@ -1,2 +1,5 @@
 *.obj
 *.tlog
+/.vs/
+Project/debug/*
+Project/bin/*

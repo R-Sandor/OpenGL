@@ -1,11 +1,46 @@
 #include "utility.h"
 
+/* 
+ * Borrowed from OpenGL 1.4
+ * Cite: Nate Robins
+ */
+
+
 using namespace std;
-void printString(string str)
+void printString(GLuint x, GLuint y, GLvoid* font_style, string str)
 {
+    glRasterPos2i(x, y);
 	for (int i = 0; i < str.length(); i++)
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, str[i]);
+		glutBitmapCharacter(font_style, str[i]);
 }
+
+
+/**  
+ * Draws a string on screen.
+ * 
+ * \param x         - x cordinate
+ * \param y         - y cordinate
+ * \param format    - string to be displayed
+ * \param ...       - vargs aditional formating information
+ * Used code from text book.
+ * Works Cited: Nate Robin OpenGL 1.4 Source code
+ */
+void 
+drawstr(GLuint x, GLuint y, GLvoid *font_style, string text, ...)
+{
+    va_list args;
+    char buffer[255];
+
+    //va_start(args, text);
+   // vsprintf_s(buffer, text, args);
+   // va_end(args);
+    
+    glRasterPos2i(x, y);
+    for (int i = 0; text.length()-1; i++)
+        glutBitmapCharacter(font_style, text[i]);
+}
+
+
 
 /**
  * Opens and checks files. 

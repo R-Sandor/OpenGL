@@ -1,54 +1,3 @@
-/*
- * Copyright (c) 1993-2003, Silicon Graphics, Inc.
- * All Rights Reserved
- *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose and without fee is hereby granted, provided that the above
- * copyright notice appear in all copies and that both the copyright
- * notice and this permission notice appear in supporting documentation,
- * and that the name of Silicon Graphics, Inc. not be used in
- * advertising or publicity pertaining to distribution of the software
- * without specific, written prior permission.
- *
- * THE MATERIAL EMBODIED ON THIS SOFTWARE IS PROVIDED TO YOU "AS-IS" AND
- * WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED OR OTHERWISE,
- * INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY OR
- * FITNESS FOR A PARTICULAR PURPOSE.  IN NO EVENT SHALL SILICON
- * GRAPHICS, INC.  BE LIABLE TO YOU OR ANYONE ELSE FOR ANY DIRECT,
- * SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND,
- * OR ANY DAMAGES WHATSOEVER, INCLUDING WITHOUT LIMITATION, LOSS OF
- * PROFIT, LOSS OF USE, SAVINGS OR REVENUE, OR THE CLAIMS OF THIRD
- * PARTIES, WHETHER OR NOT SILICON GRAPHICS, INC.  HAS BEEN ADVISED OF
- * THE POSSIBILITY OF SUCH LOSS, HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE POSSESSION, USE
- * OR PERFORMANCE OF THIS SOFTWARE.
- *
- * US Government Users Restricted Rights
- * Use, duplication, or disclosure by the Government is subject to
- * restrictions set forth in FAR 52.227.19(c)(2) or subparagraph
- * (c)(1)(ii) of the Rights in Technical Data and Computer Software
- * clause at DFARS 252.227-7013 and/or in similar or successor clauses
- * in the FAR or the DOD or NASA FAR Supplement.  Unpublished - rights
- * reserved under the copyright laws of the United States.
- *
- * Contractor/manufacturer is:
- *	Silicon Graphics, Inc.
- *	1500 Crittenden Lane
- *	Mountain View, CA  94043
- *	United State of America
- *
- * OpenGL(R) is a registered trademark of Silicon Graphics, Inc.
- */
-
- /**
-  * Author: Raphael Sandor
-  * Date:	9/28/2020
-  * 
-  * This program will take input data and turn the input
-  * data in to probability distribution function with a
-  * histogram bar graph.
-  */
-
 #include <stdlib.h>
 #include <gl/glew.h>
 #include <GL/glut.h>
@@ -59,24 +8,156 @@
 #include "utility.h"
 #include "histogram.h"
 
+ /**
+  * Author: Raphael Sandor
+  * Date:	9/28/2020
+  * 
+  * This program will take input data and turn the input
+  * data in to probability distribution function with a
+  * histogram bar graph.
+  */
+
+
 using namespace std;
-int static INTERVALS = 30;
+
+/*
+	Globals and defaults. 
+*/
+int  INTERVALS = 30;
+int  BORDER = 18;
+int  GAP = 40;
+
+// Width and Height of windows
+int WIDTH, HEIGHT;
+string file			= "normal.dat";
+string distribution = "Normal";
+
+double Mu			= 0.0;
+double sigma		= 1.0;
+
+Histogram *normHist;
+Histogram *expoHist;
+Histogram *fNmHist; // first name data histogram
+Histogram *lstNmHist;
+
+GLvoid* font_9_by_15		= GLUT_BITMAP_9_BY_15;
+GLvoid* font_8_by_13		= GLUT_BITMAP_8_BY_13;
+GLvoid* font_helvetica_12	= GLUT_BITMAP_HELVETICA_12;
+
 
 void display(void)
 {
+	int probabTxtLocY = HEIGHT - BORDER - 15;
+	int maxDenY = HEIGHT - BORDER- GAP - 15;
+
 	/* clear all pixels  */
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-
+	glLoadIdentity();
 	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_POLYGON);
-	glVertex3f(-2.0, 0.25, 0.0);
-	glVertex3f(0-.75, 0.25, 0.0);
-	glVertex3f(0-.75, 0.75, 0.0);
-	glVertex3f(0-.25, 0.75, 0.0);
+	
+	glBegin(GL_LINES);
+		glVertex2f(BORDER, HEIGHT - BORDER);
+		glVertex2f(BORDER, BORDER);
+		glVertex2f(WIDTH - BORDER, BORDER);
+		glVertex2f(BORDER, BORDER);
 	glEnd();
 
+	double * bins;
+	if (INTERVALS == 30)
+		bins = normHist->getBins30();
+	else if (INTERVALS == 40)
+		bins = normHist->getBins40();
+	else
+		bins = normHist->getBins50();
+
+	// Print Text to the screen. 
+	printString(BORDER + 11, maxDenY,
+		font_8_by_13, to_string(normHist->getMaxDensity(INTERVALS)));
+
+	printString(BORDER + 7, HEIGHT - BORDER * 2,
+		font_8_by_13, "Probability Density");
+	printString(WIDTH - BORDER - 21, BORDER + 10,
+		font_8_by_13, "Data");
+	printString(WIDTH - GAP * 5 - 20, probabTxtLocY,
+		font_8_by_13, "File: " + file);
+
+	string str;
+	str = to_string(normHist->getMin());
+	printString(WIDTH - GAP * 5 - 20, probabTxtLocY - 15,
+		font_8_by_13, "Min: " + str.erase(str.find_last_not_of('0') + 1, std::string::npos));
+
+	str = to_string(normHist->getMax());
+
+	printString(WIDTH - GAP * 5 - 20, probabTxtLocY - 30,
+		font_8_by_13, "Max: " + str.erase(str.find_last_not_of('0') + 1, std::string::npos));
+	printString(WIDTH - GAP * 5 - 20, probabTxtLocY - GAP - 5,
+		font_8_by_13, "Num of Intervals: " + to_string(INTERVALS));
+	
+	if (file == "normal.dat") {
+		cout << "Normal.dat" << endl;
+		// Draw a line at the max
+		// what is the height equiv.
+		cout << "Top Bound " << probabTxtLocY << endl;
+		
+
+
+		printString(WIDTH - GAP * 5 - 20, probabTxtLocY - GAP*2,
+			font_8_by_13, "Distribution: " + distribution);
+
+		string str = to_string(sigma);
+		if (Mu == 0)
+			str = "0";
+
+		printString(WIDTH - GAP * 5 - 20, probabTxtLocY - GAP*2 - 17,
+			font_8_by_13, "Mu: " + str);
+		if (sigma != 1)
+			str = str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+		else {
+			str = "1";
+		}
+		printString(WIDTH - GAP * 5 - 20, probabTxtLocY - GAP*2 - 35,
+			font_8_by_13, "Sigma: " + str);
+
+		glBegin(GL_LINES);
+			glVertex2f(BORDER + 7, maxDenY);
+			glVertex2f(BORDER, maxDenY);
+		glEnd();
+		double maxDensity = normHist->getMaxDensity(INTERVALS);
+		double width = (WIDTH - BORDER * 4)/INTERVALS;
+		double height = 0.0;
+		for (int i = 0; i < INTERVALS; i++)
+		{
+			
+			height = ((double)maxDenY- BORDER) * (bins[i] / maxDensity);
+			
+			cout << "bins[i] " << bins[i] << endl;
+			cout <<"maxDenY- BORDER " << (double)maxDenY - BORDER <<   " probabTxtLocY " << probabTxtLocY <<  " height " << height  << " BORDER " << BORDER << " Max Density " << maxDensity<< endl;
+			
+			
+
+			glBegin(GL_LINE_STRIP);
+				glVertex2f(BORDER*3 + width * i, BORDER);
+				glVertex2f(BORDER*3 + width * i, BORDER + height);
+				glVertex2f(BORDER*3 + width * i + width, BORDER + height);
+				glVertex2f(BORDER*3 + width * i + width, BORDER);
+			glEnd();
+			
+		}
+
+	}
+	else if (file == "expo.dat") {
+		cout << "Working on this " << endl; 
+	}
+	else if (file == "18.dat") {
+		cout << "18.dat" << endl;
+	}
+	else if (file == "19.dat") {
+		cout << "19.dat" << endl;
+
+	}
 	glFlush();
+
 }
 
 void init(void)
@@ -85,22 +166,23 @@ void init(void)
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	/* initialize viewing values  */
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();	
 }
 
 void myReshape(int w, int h)
 {
+	cout << "RESHAPE Called" << endl;
+	WIDTH = w;
+	HEIGHT = h;
 	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);	
 	glLoadIdentity();
-	if (w <= h)
-		glOrtho(-2.0, 2.0, -2.0 * (GLfloat)h / (GLfloat)w,
-			2.0 * (GLfloat)h / (GLfloat)w, -10.0, 10.0);
-	else
-		glOrtho(-2.0 * (GLfloat)w / (GLfloat)h,
-			2.0 * (GLfloat)w / (GLfloat)h, -2.0, 2.0, -10.0, 10.0);
+
+	//gluOrtho2D(-100, 1, -10, 1);
+	gluOrtho2D(0, w, 0, h);
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 	glutPostRedisplay();
 }
 
@@ -112,18 +194,6 @@ void progMenu(int value)
 		break;
 	}
 }
-
-void progMenu2(int value)
-{
-	glutAddMenuEntry("Testing2", 30);
-	glutAddMenuEntry("Testing3", 30);
-	switch (value) {
-
-		default:
-			break;
-	}
-}
-
 
 /*
  * Main application.
@@ -144,18 +214,13 @@ int main(int argc, char** argv)
 	openFiles(&normData, &expoData, &fNmData, &lstNmData);
 
 	//create our historgram's data.
-	Histogram normHist(&normData);
-	//Histogram expoHist(&expoData);
-	//Histogram fNmHist(&fNmData); // first name data histogram
-	//Histogram lstNmHist(&lstNmData); // last name
-
-
-	
-	// Bins are determined by the user the default intervals is 30.
-	//normHist.divideIntoBins(&expoData)
+	normHist = new Histogram(&normData);
+	expoHist = new Histogram(&expoData);
+	fNmHist	 = new Histogram(&fNmData); // first name data histogram
+	lstNmHist= new Histogram(&lstNmData); // last name
 
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(600, 450);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Input Analysis");
 	glewInit();
