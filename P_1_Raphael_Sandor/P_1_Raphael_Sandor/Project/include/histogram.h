@@ -12,19 +12,29 @@ class Histogram
 		double min		= 100.0;
 		double max		= -100.0;
 		double range	= 0.00;
+
 		// Each bins max density. 
 		// maxDensity[0] is for bins30[]
 		// maxDesnity[1] is for bins40[] etc.
 		double maxDensity[3] = { 0 };
+		
 		// Number of points
-		int points		= 0;
+		int points				= 0;
+
+		// standard deviation for data set.
+		double stdDev			= 0.0;
+		double variance			= 0.0;
+
+		// expected value from data set.
+		double expectedValue	= 0.0;
+
 		// Read in data set for which the histogram belongs.
 		double* dataSet;
+
 		// Calculated bins. 
 		double bins30[30] = {0};
 		double bins40[40] = {0};
 		double bins50[50] = {0};
-		int bigest30, bigest40, bigest50 = 0;
 
 	public:
 
@@ -60,24 +70,92 @@ class Histogram
 		/**
 		 * Returns the max density..
 		 * 
-		 * \return the maximum density based on the number of bins.
+		 * \return The maximum density based on the number of bins.
 		 */
 		double getMaxDensity(int bins);
 
+		/**
+		 * Returns the smallest value from data set.
+		 * 
+		 * \return Minimum point from data set.
+		 */
 		double getMin();
 
+		/**
+		 * Get the maximum point from the data set.
+		 * 
+		 * \return Maximum point from data set. 
+		 */
 		double getMax();
 
+		/**
+		 * Get the range of the data set.
+		 * 
+		 * \return Range
+		 */
+		double getRange();
+
+		/**
+		 * Get bin30 array.
+		 * 
+		 * \return bins30.
+		 */
 		double* getBins30();
 
+		/**
+		 * Get bin40 array.
+		 * 
+		 * \return bins40.
+		 */
 		double* getBins40();
 
+		/**
+		 * Get bin50 array.
+		 * 
+		 * \return bins50.
+		 */
 		double* getBins50();
 
+		/**
+		 * Wrapper funtion that gets the right
+		 * bins based on the provided interval.
+		 * 
+		 * \param interval - the number of bins.
+		 * \return		     The bins to the number of intervals.
+		 *                   that is if the interval is 30, then 
+		 *					 bins30 is returned.
+		 */
+		double* getBins(int interval);
+
+		/**
+		 * Returns the number of points from data set for 
+		 * a particular histogram.
+		 * 
+		 * \return Number of points.
+		 */
 		int getPoints();
 
+		/**
+		 * Gets the width based on the number of intervals.
+		 * The width is the range / number of bins.
+		 * 
+		 * \param binSize	- number of bins;
+		 * \return			  Range / (Number of bins)
+		 */
 		double getWidth(int binSize);
 
-		
+		/**
+		 * Get the standard deviation for a data set.
+		 * 
+		 * \return Standard deviation.
+		 */
+		double getStdDev();
+
+		/**
+		 * Get the expected/MU value.
+		 * 
+		 * \return Mu.
+		 */
+		double getMu();
 };
 

@@ -34,31 +34,28 @@ Histogram::Histogram(ifstream* data)
     }
 
     // expected value
-    double ev = sum / points;
-    cout << "Expected Value: " << ev << endl;
+    expectedValue = sum / points;
 
-    double stdDev = 0.0;
+    stdDev = 0.0;
     double sum2 =0.0;
     for (int i = 0; i < points; i++)
     {
-        double k =(double)dataSet[i] - ev;
+        double k =(double)dataSet[i] - expectedValue;
         double prod = pow(k, 2.0);
         sum2 = sum2 + prod;
     }
-    double variance = (double) sum2/ points;
+    variance = (double) sum2/ points;
     stdDev = sqrt(variance);
-    cout << "varaiance " << variance << endl;
-    cout << "std Dev " << stdDev << endl;
 
-     //actuall mergeSort(dataSet, 0, points - 1);
-     mergeSort(dataSet, 0, points - 1);
+    //actuall mergeSort(dataSet, 0, points - 1);
+    mergeSort(dataSet, 0, points - 1);
+    
     // Get min/max
     min = dataSet[0];
+    
     // actual max = dataSet[points - 1];
     max = dataSet[points-1];
     range = max - min;
-    cout << "range " << range << endl;
-    cout << "min " << min << "max " << max << endl;
 
     // pre calculate the bins before we need them
     calculateBins(bins30, 29, range);
@@ -67,14 +64,6 @@ Histogram::Histogram(ifstream* data)
 
 }
 
-/**
- * Finds the min and max value from data set.
- * 
- * \param data	- data file.
- * \param size	- size of data set.
- * \param min	- min value of data set
- * \param max	- max value of data set
- */
 void Histogram::findMinMax(ifstream* data, int size, double &min, double &max)
 {
     string tmp = "";
@@ -98,7 +87,6 @@ void Histogram::calculateBins(double* bin, int sizeOfBins, double range)
 
     int binIndex = 0;
     double boundary = min + width;
-    double test = 0.0;
     for (int i = 0; i < points; i++)
     {
         while (dataSet[i] > boundary && binIndex < (sizeOfBins))
@@ -116,11 +104,6 @@ void Histogram::calculateBins(double* bin, int sizeOfBins, double range)
             bin[binIndex] = bin[binIndex] + 1;
         }
     }
-
-    //cout << " boundary" << boundary << endl;
-    //cout << "min " << min << endl; 
-    //cout << "max " << max << endl;
-    //cout << "points " << points << endl;
 
     int selected; 
     if (sizeOfBins + 1 == 30) { selected = 0; }
@@ -170,6 +153,16 @@ double* Histogram::getBins50() {
     return bins50;
 }
 
+double* Histogram::getBins(int interval) {
+
+    if (interval == 30)
+       return getBins30();
+    else if (interval == 40)
+       return getBins40();
+    else
+       return getBins50();
+}
+
 int Histogram::getPoints() {
     return points;
 }
@@ -178,3 +171,14 @@ double Histogram::getWidth(int binSize) {
    return (double) range / binSize;
 }
 
+double Histogram::getStdDev() {
+    return stdDev;
+}
+
+double Histogram::getMu() {
+    return expectedValue;
+}
+
+double Histogram::getRange() {
+    return range;
+}

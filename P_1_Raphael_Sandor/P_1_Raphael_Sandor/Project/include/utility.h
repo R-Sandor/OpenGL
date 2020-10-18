@@ -5,32 +5,49 @@
 #include <iostream>
 #include <stdarg.h>
 
-
 using namespace std;
-
-void printString(GLuint x, GLuint y, GLvoid* font_style, string str);
 
 /**
  * Check and open all the files the program needs will open. 
  * 
  * \param norm - normal.dat ifstream
  * \param expo - expo.dat ifstream
- * \param fist - first name file ifstream.
- * \param last - last name file ifstream
+ * \param fist - First name file ifstream.
+ * \param last - Last name file ifstream
  */
 void openFiles(ifstream *norm, ifstream *expo, ifstream *first, ifstream *last);
 
+/**
+ * Merge part of the merge sort algorithm.
+ * \param input	- Data set to sort.
+ * \param lft	- Left side
+ * \param rt	- Right side
+ */
 void merge(double input[], int lft, int mid, int rt);
+
+/**
+ * Merge sort algorithm.
+ *
+ * \param input	- Data set to sort.
+ * \param lft	- Left side
+ * \param rt	- Right side
+ */
 void mergeSort(double input[], int lft, int rt);
 
 /**
- * Draws a string on screen.
+ * Prints at a given x and y location.
  *
- * \param x         - x cordinate
- * \param y         - y cordinate
- * \param text    - string to be formated
- * \param ...       - vargs aditional formating information
- * Used code from text book.
- * Works Cited: Nate Robin OpenGL 1.4 Source code
+ * \param x				- X position.
+ * \param y				- Y position.
+ * \param font_style	- Font style.
+ * \param str			- A temporary string of doubles to str.
  */
-void drawstr(GLuint x, GLuint y, string text, ...);
+void printString(GLuint x, GLuint y, GLvoid* font_style, string str);
+
+/**
+ * Removes trailing 0s.
+ *
+ * \param str   - String input
+ * \return      Formatted output
+ */
+string rmTrail0s(string str);

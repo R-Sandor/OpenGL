@@ -1,12 +1,18 @@
 #include "utility.h"
-
-/* 
- * Borrowed from OpenGL 1.4
- * Cite: Nate Robins
+/**
+ * Utility funtion for main.
  */
 
-
 using namespace std;
+
+/**
+ * Prints at a given x and y location.
+ *
+ * \param x				- x position.
+ * \param y				- y position.
+ * \param font_style	- font style.
+ * \param str			- a temporary string of doubles to str.
+ */
 void printString(GLuint x, GLuint y, GLvoid* font_style, string str)
 {
     glRasterPos2i(x, y);
@@ -25,8 +31,7 @@ void printString(GLuint x, GLuint y, GLvoid* font_style, string str)
  * Used code from text book.
  * Works Cited: Nate Robin OpenGL 1.4 Source code
  */
-void 
-drawstr(GLuint x, GLuint y, GLvoid *font_style, string text, ...)
+void drawstr(GLuint x, GLuint y, GLvoid *font_style, string text, ...)
 {
     va_list args;
     char buffer[255];
@@ -39,8 +44,6 @@ drawstr(GLuint x, GLuint y, GLvoid *font_style, string text, ...)
     for (int i = 0; text.length()-1; i++)
         glutBitmapCharacter(font_style, text[i]);
 }
-
-
 
 /**
  * Opens and checks files. 
@@ -60,7 +63,7 @@ void openFiles(ifstream *norm, ifstream *expo, ifstream *first, ifstream *last)
 	// S - 19th position in alphabet
 	int s = 19 % 10 + 11;
 
-	norm->open(".\\data\\normal.dat");
+    norm->open(".\\data\\normal.dat");
 	expo->open(".\\data\\expo.dat");
 	first->open(".\\data\\" + to_string(r) + ".dat");
 	last->open(".\\data\\" + to_string(s) + ".dat");
@@ -79,8 +82,6 @@ void openFiles(ifstream *norm, ifstream *expo, ifstream *first, ifstream *last)
 }
 
 
-/*
-*/
 void merge(double input[], int lft, int mid, int rt)
 {
     int i, j, k;
@@ -136,13 +137,7 @@ void merge(double input[], int lft, int mid, int rt)
     delete[]  lftArray, rtArray;
 }
 
-/**
- * .
- *
- * \param input
- * \param lft
- * \param rt
- */
+
 void mergeSort(double input[], int lft, int rt)
 {
 
@@ -156,4 +151,26 @@ void mergeSort(double input[], int lft, int rt)
 
         merge(input, lft, m, rt);
     }
+}
+
+
+string rmTrail0s(string str)
+{
+    // Count trailing zeros 
+    int i = str.length()-1;
+    for (; i > 0;) {
+        if (str[i] == '0') {
+            i--;
+        }
+        else
+            break;
+    }
+    if (str[i] == '.') {
+        i -= 1;
+    }
+
+    // The erase function removes i characters 
+    // from given index (0 here) 
+    str.erase(i+1, str.length());
+    return str;
 }
