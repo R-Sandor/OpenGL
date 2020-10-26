@@ -60,16 +60,17 @@ class Histogram
 		 * Calculate the bins of the histogram, number of points in each bin.
 		 * Calculate the density of each bin.
 		 * 
-		 * \param data	- data file
-		 * \param bin	- array of doubles
-		 * \sizeOfBin	- number of elements in array.
-		 * \param range	- range of the data.
+		 * \param bin		- array of doubles
+		 * \param sizeOfBin	- number of elements in array.
+		 * \param range		- range of the data.
 		 */
 		void calculateBins(double* bin, int sizeOfBin, double range);
 
 		/**
 		 * Returns the max density..
 		 * 
+		 * \param bins	- Number of bins. Used to determine which 
+		 *				  data set to return the max density from.
 		 * \return The maximum density based on the number of bins.
 		 */
 		double getMaxDensity(int bins);

@@ -12,7 +12,7 @@ using namespace std;
  * 
  * \param norm - normal.dat ifstream
  * \param expo - expo.dat ifstream
- * \param fist - First name file ifstream.
+ * \param first - First name file ifstream.
  * \param last - Last name file ifstream
  */
 void openFiles(ifstream *norm, ifstream *expo, ifstream *first, ifstream *last);
@@ -21,6 +21,7 @@ void openFiles(ifstream *norm, ifstream *expo, ifstream *first, ifstream *last);
  * Merge part of the merge sort algorithm.
  * \param input	- Data set to sort.
  * \param lft	- Left side
+ * \param mid	- middle point
  * \param rt	- Right side
  */
 void merge(double input[], int lft, int mid, int rt);
