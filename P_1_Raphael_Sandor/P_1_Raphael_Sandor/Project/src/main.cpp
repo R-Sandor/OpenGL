@@ -7,27 +7,29 @@
 #include <string>
 #include "utility.h"
 #define _USE_MATH_DEFINES
-#include <math.h>
+#include <math.h> 
 #include "histogram.h"
 
 /**
- * Author: Raphael J. Sandor
- * Date:	9/28/2020
- *
- * This program will take input data and turn the input
+ * \file 
+ * This the main file for Analysis Input. 
+ * \author: Raphael J. Sandor
+ * \date:	9/28/2020
+ * 
+ * \brief This program will take input data and turn the input
  * data in to probability distribution function with a
  * histogram bar graph.
  */
 
 using namespace std;
 /*
-	Globals and defaults.
+	\file Globals and defaults.
 */
 int  INTERVALS = 30;
 int  BORDER = 18;
 int  GAP = 40;
 
-// Width and Height of windows
+/// Width and Height of windows
 int WIDTH, HEIGHT;
 string FILE_NAME = "normal.dat";
 string DISTRIBUTION = "Normal";
@@ -35,13 +37,15 @@ string DISTRIBUTION = "Normal";
 double MU = 0.0;
 double SIGMA = 1.0;
 double STEP = .05;
-double LAMDA = 1.0;
+double LAMBDA = 1.0;
 
+/// \brief histogram pointers
 Histogram* normHist;
 Histogram* expoHist;
-Histogram* fNmHist; // first name data histogram
+Histogram* fNmHist; 
 Histogram* lstNmHist;
 
+///  font styles
 GLvoid* font_9_by_15 = GLUT_BITMAP_9_BY_15;
 GLvoid* font_8_by_13 = GLUT_BITMAP_8_BY_13;
 GLvoid* font_helvetica_12 = GLUT_BITMAP_HELVETICA_12;
@@ -52,7 +56,7 @@ GLvoid* font_helvetica_12 = GLUT_BITMAP_HELVETICA_12;
  * Sets up the text need by the program.
  *
  * \param titleLocY			- Location of the title
- * \param maxDensTxtLocY	- The Y model position of the density text.
+ * \param maxDesTxtLocY		- The Y model position of the density text.
  * \param hist				- The histogram for the calculation.
  */
 void setupText(int titleLocY, int maxDesTxtLocY, Histogram* hist)
@@ -93,7 +97,7 @@ void setupText(int titleLocY, int maxDesTxtLocY, Histogram* hist)
  *
  * \param maxDensTxtLocY	- The Y model position of the density text
  */
-void drawXY(int maxDesTxtLocY)
+void drawXY(int maxDensTxtLocY)
 {
 	glBegin(GL_LINES);
 	glVertex2f(BORDER, HEIGHT - BORDER);
@@ -102,10 +106,10 @@ void drawXY(int maxDesTxtLocY)
 	glVertex2f(BORDER, BORDER);
 	glEnd();
 
-	// Finish up border.
+	/// Finish up border.
 	glBegin(GL_LINES);
-	glVertex2f(BORDER + 7, maxDesTxtLocY);
-	glVertex2f(BORDER, maxDesTxtLocY);
+	glVertex2f(BORDER + 7, maxDensTxtLocY);
+	glVertex2f(BORDER, maxDensTxtLocY);
 	glEnd();
 }
 
@@ -115,8 +119,8 @@ void drawXY(int maxDesTxtLocY)
  * \param titleLocY - Y model position of the title.
  */
 void normalDistTxt(int titleLocY) {
-	// Draw a line at the max
-	// what is the height equiv.	
+	/// Draw a line at the max
+	/// what is the height equiv.	
 	glColor3f(.259, .5294, .96078);
 	printString(WIDTH - GAP * 5 - 20, titleLocY - GAP * 2,
 		font_8_by_13, "Distribution: " + DISTRIBUTION);
@@ -144,27 +148,25 @@ void normalDistTxt(int titleLocY) {
 void drawHistogram(double maxDensity, int maxDensTxtLocY,
 	Histogram* hist, double* bins)
 {
-	/*
-	 *	Draw our histograms in proportion to the screen space
+	/** 
+	*   Draw our histograms in proportion to the screen space
 	 *  within the the borders.
 	 */
 	double histPxlWidth = (WIDTH - BORDER * 4) / INTERVALS;
 	double histPxlHeight = 0.0;
 	glColor3f(.941, .521, .0745);
 	double normalizedDensity = ceil(maxDensity * 100) / 100;
-
+	glBegin(GL_LINE_STRIP);
 	for (int i = 0; i < INTERVALS; i++)
 	{
 		histPxlHeight = ((double)maxDensTxtLocY - BORDER) * (bins[i] / normalizedDensity);
-		glBegin(GL_LINE_STRIP);
 		glVertex2f(BORDER * 3 + histPxlWidth * i, BORDER);
 		glVertex2f(BORDER * 3 + histPxlWidth * i, BORDER + histPxlHeight);
 		glVertex2f(BORDER * 3 + histPxlWidth * i + histPxlWidth, BORDER + histPxlHeight);
 		glVertex2f(BORDER * 3 + histPxlWidth * i + histPxlWidth, BORDER);
-		glEnd();
 	}
+	glEnd();
 	glColor3f(1.0, 1.0, 1.0);
-
 }
 
 /**
@@ -180,19 +182,21 @@ void expDistTxt(int titleLocY) {
 	printString(WIDTH - GAP * 5 - 20, titleLocY - GAP * 2,
 		font_8_by_13, "Funtion Type: " + DISTRIBUTION);
 
-	string str = to_string(LAMDA);
-	if (LAMDA == 0)
+	string str = to_string(LAMBDA);
+	if (LAMBDA == 0)
 		str = "0";
 	printString(WIDTH - GAP * 5 - 20, titleLocY - GAP * 2 - 17,
-		font_8_by_13, "Lamda: " + str);
+		font_8_by_13, "Lambda: " + rmTrail0s(str));
 }
 
 /********** Plot calculations **********/
 /**
  * Plot the points for the a normal probability distribution.
  *
- * \param x	- This is the random variable.
- * \return  - Returns calculation to plot
+ * \param x			- This is the random variable.
+ * \param stdDev	- Standard deviation.
+ * \param mu		- Expected value.
+ * \return			- Returns calculation to plot.
  */
 double normDist(double x, double stdDev, double mu) {
 
@@ -220,8 +224,8 @@ double normDist(double x, double stdDev, double mu) {
  */
 double expoDist(double x) {
 
-	double numerator = exp(-x / LAMDA);
-	double denominator = (1 / LAMDA);
+	double numerator = exp(-x / LAMBDA);
+	double denominator = (1 / LAMBDA);
 	return  numerator * denominator;
 }
 
@@ -239,6 +243,7 @@ void drawNormDist(int maxDensTxtLocY, double maxDensity, Histogram* hist) {
 	glColor3f(.259, .5294, .96078);
 	glBegin(GL_LINE_STRIP);
 	double minPoint = hist->getMin();
+
 	for (int x = 0; x < 100; x++)
 	{
 		double normalDist = normDist(x * width + minPoint, SIGMA, MU);
@@ -252,9 +257,10 @@ void drawNormDist(int maxDensTxtLocY, double maxDensity, Histogram* hist) {
 /**
  * Draws a exponential distribution.
  * 
+ * \param titleLocY		 - Y position the title.
  * \param maxDensTxtLocY - Maximum density text Y location.
  * \param maxDensity	 - Maximum histogram density.
- * \param hist			 - The selected histogram
+ * \param hist			 - The selected histogram.
  */
 void drawExpoDist(int titleLocY, int maxDensTxtLocY, double maxDensity,
 	Histogram* hist)
@@ -262,11 +268,13 @@ void drawExpoDist(int titleLocY, int maxDensTxtLocY, double maxDensity,
 	double yLoc = 0.0;
 	double width = hist->getWidth(100);
 	double widthPxl = (WIDTH - BORDER * 4) / 100;
+	double minPoint = hist->getMin();
+
 	glColor3f(.259, .5294, .96078);
 	glBegin(GL_LINE_STRIP);
 	for (int x = 0; x < 100; x++)
 	{
-		double exDist = expoDist(x * width);
+		double exDist = expoDist(x * width + minPoint);
 		yLoc = (((double)maxDensTxtLocY - BORDER) / maxDensity) * exDist;
 		glVertex2f(BORDER * 3 + widthPxl * x, yLoc + BORDER);
 	}
@@ -280,6 +288,7 @@ void drawExpoDist(int titleLocY, int maxDensTxtLocY, double maxDensity,
  * 
  * \param titleLocY			- Y model position of the title.
  * \param maxDensTxtLocY	- Maximum density text y location.
+ * \param maxDensity		- Maximum density of histogram data set.
  * \param hist				- Histogram pointer, that points to 
  *							  histogram selected.
  */
@@ -301,9 +310,9 @@ void display(void)
 	int titleLocY = HEIGHT - BORDER - 15;
 	int maxDensTxtLocY = HEIGHT - BORDER- GAP - 15;
 	double* bins;
-	// intialize it to something to possible unintialized memory.
+	/// intialize it to something to possible unintialized memory.
 	Histogram * hist = normHist; 
-	/* clear all pixels  */
+	/// clear all pixels  
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -357,7 +366,6 @@ void myReshape(int w, int h)
 	glMatrixMode(GL_PROJECTION);	
 	glLoadIdentity();
 
-	//gluOrtho2D(-100, 1, -10, 1);
 	gluOrtho2D(0, w, 0, h);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -439,29 +447,40 @@ void keyboard(int key, int x, int y) {
 	switch (key)
 	{
 	case GLUT_KEY_UP:
-		if (DISTRIBUTION == "Normal" && (SIGMA + STEP) < 3)
+		if (DISTRIBUTION == "Normal" && (SIGMA + STEP) <= 2.99)
 			SIGMA += STEP;
 		else
-		if ((LAMDA + STEP) < 6)
-			LAMDA += STEP;
+		{
+			if ((LAMBDA + STEP) <= 5.99)
+				LAMBDA += STEP;
+			else
+				LAMBDA = 5.99;
+		}
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_DOWN:
-		if (DISTRIBUTION == "Normal" && (SIGMA - STEP) >.02)
-			SIGMA -= STEP;
+		if (DISTRIBUTION == "Normal")
+			if ((SIGMA - STEP) > .02)
+				SIGMA -= STEP;
+			else SIGMA = .03;
 		else
-			if ((LAMDA - STEP) > .1)
-				LAMDA -= STEP;
+			if ((LAMBDA - STEP) >= .2)
+				LAMBDA -= STEP;
+			else LAMBDA = .1;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_LEFT:
-		if (DISTRIBUTION == "Normal" && (MU - STEP) >= 0)
-			MU -= STEP;
+		if (DISTRIBUTION == "Normal")
+			if ((MU - STEP) >= 0)
+				MU -= STEP;
+			else
+				MU = 0;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_RIGHT:
-		if (DISTRIBUTION == "Normal" && (MU + STEP ) < 5)
+		if (DISTRIBUTION == "Normal" && (MU + STEP) <= 4.99)
 			MU += STEP;
+		else MU = 4.99;
 		glutPostRedisplay();
 		break;
 	default:

@@ -5,14 +5,6 @@
 
 using namespace std;
 
-/**
- * Prints at a given x and y location.
- *
- * \param x				- x position.
- * \param y				- y position.
- * \param font_style	- font style.
- * \param str			- a temporary string of doubles to str.
- */
 void printString(GLuint x, GLuint y, GLvoid* font_style, string str)
 {
     glRasterPos2i(x, y);
@@ -21,38 +13,6 @@ void printString(GLuint x, GLuint y, GLvoid* font_style, string str)
 }
 
 
-/**  
- * Draws a string on screen.
- * 
- * \param x         - x cordinate
- * \param y         - y cordinate
- * \param format    - string to be displayed
- * \param ...       - vargs aditional formating information
- * Used code from text book.
- * Works Cited: Nate Robin OpenGL 1.4 Source code
- */
-void drawstr(GLuint x, GLuint y, GLvoid *font_style, string text, ...)
-{
-    va_list args;
-    char buffer[255];
-
-    //va_start(args, text);
-   // vsprintf_s(buffer, text, args);
-   // va_end(args);
-    
-    glRasterPos2i(x, y);
-    for (int i = 0; text.length()-1; i++)
-        glutBitmapCharacter(font_style, text[i]);
-}
-
-/**
- * Opens and checks files. 
- * 
- * \param norm	- normal data set.
- * \param expo	- exponential data set.
- * \param first	- first name data set.
- * \param last	- last name data set.
- */
 void openFiles(ifstream *norm, ifstream *expo, ifstream *first, ifstream *last) 
 {
 	// The first file number = Your First Name Initial % 10 + 1

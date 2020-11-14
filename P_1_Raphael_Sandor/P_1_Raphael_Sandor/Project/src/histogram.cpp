@@ -82,14 +82,16 @@ void Histogram::findMinMax(ifstream* data, int size, double &min, double &max)
 
 void Histogram::calculateBins(double* bin, int sizeOfBins, double range)
 {
-
+    /// the width of each bin
     double width = range / ((double)sizeOfBins + 1);
 
     int binIndex = 0;
+    /// boundary current point which at start is the smallest point
+    /// to the begginning of next interval/bin.
     double boundary = min + width;
     for (int i = 0; i < points; i++)
     {
-        while (dataSet[i] > boundary && binIndex < (sizeOfBins))
+        while (dataSet[i] > boundary && binIndex < sizeOfBins)
         {
             boundary = boundary + width;
             binIndex++;
@@ -105,12 +107,17 @@ void Histogram::calculateBins(double* bin, int sizeOfBins, double range)
         }
     }
 
+    /// Selected picks which bin size we are calculating maxDensity for,
+    /// after which, we know which bins to save our calculation.
+    /// i.e. we will know what is the maxDensity 
+    /// for bins30, bins40, or bins50.
     int selected; 
     if (sizeOfBins + 1 == 30) { selected = 0; }
     else if (sizeOfBins + 1 == 40) { selected = 1;}
     else { selected = 2; }
 
-   // Calc Max density;
+    /// Calc Max density, also save the density of each bin
+    /// in its respective spot
     for (int x = 0; x < sizeOfBins + 1; x++) {
         double binDesnsity = (double)((bin[x] / width) / points);
         if (binDesnsity > maxDensity[selected])
