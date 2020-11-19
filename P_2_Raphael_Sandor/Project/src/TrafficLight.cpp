@@ -24,11 +24,14 @@ void TrafficLight::setMaterials()
 	redOn.Kd[1] = 0.0;
 	redOn.Kd[2] = 0.0;
 
+	/// Keep these the same as the values
+	/// from the .mtl
 	redOn.Ks[0] = 0.33;
 	redOn.Ks[1] = 0.33;
 	redOn.Ks[2] = 0.33;
 
-	redOn.illum = 15;
+	// Turn ambient on.
+	redOn.illum = 1;
 	redOn.d = 1.0;
 	/**********************************/
 
@@ -66,7 +69,8 @@ void TrafficLight::setMaterials()
 	yellowOn.Ks[1] = 0.33;
 	yellowOn.Ks[2] = 0.33;
 
-	yellowOn.illum = 15;
+	// Turn ambient on
+	yellowOn.illum = 1;
 	yellowOn.d = 1.0;
 	/**********************************/
 
@@ -81,16 +85,18 @@ void TrafficLight::setMaterials()
 	yellowOff.Kd[1] = 0.0; 
 	yellowOff.Kd[2] = 0.0;
 
+
 	yellowOff.Ks[0] = 0.33; 
 	yellowOff.Ks[1] = 0.33; 
 	yellowOff.Ks[2] = 0.33;
+
 	yellowOff.illum = 0; 
 	yellowOff.d		= 1.0;
 	/**********************************/
 
 
 
-	// Assign value to greenOn
+	/// Assign value to greenOn
 	/**********************************/
 	greenOn.Ka[0] = 0.0;
 	greenOn.Ka[1] = 0.0;
@@ -100,16 +106,20 @@ void TrafficLight::setMaterials()
 	greenOn.Kd[1] = 1.0;
 	greenOn.Kd[2] = 0.0;
 
+	/// Keep these the same as the values
+	/// from the .mtl
 	greenOn.Ks[0] = 0.33;
 	greenOn.Ks[1] = 0.33;
 	greenOn.Ks[2] = 0.33;
-
-	greenOn.illum = 15;
+	
+	// Turn ambient on but doesn't see to make 
+	// much of a difference.
+	greenOn.illum = 1;
 	greenOn.d = 1.0;
 	/**********************************/
 
 
-	// Set the values for turnning green off.
+	/// Set the values for turnning green off.
 	/**********************************/
 	greenOff.Ka[0] = 0.0; 
 	greenOff.Ka[1] = 0.0; 
@@ -136,18 +146,18 @@ void TrafficLight::setSignal(Signal signal)
 	switch (signal)
 	{
 		case Red:
-			this->materials["_Yellow_"] = yellowOff;
 			this->materials["_Red_"] = redOn;
+			this->materials["_Yellow_"] = yellowOff;
 			this->materials["_Green_"] = greenOff;
 			break;
 		case Yellow:
-			this->materials["_Yellow_"] = yellowOn;
 			this->materials["_Red_"] = redOff;
+			this->materials["_Yellow_"] = yellowOn;
 			this->materials["_Green_"] = greenOff;
 			break;
 		case Green:
-			this->materials["_Yellow_"] = yellowOff;
 			this->materials["_Red_"] = redOff;
+			this->materials["_Yellow_"] = yellowOff;
 			this->materials["_Green_"] = greenOn;
 			break;
 	}

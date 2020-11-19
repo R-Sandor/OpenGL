@@ -20,6 +20,14 @@ using namespace std;
 
 int counter = 0; ///< Counter for the traffic signal.  Only one is needed.
 int updateInterval = 20; ///< Update interval for the update function in miliseconds.
+int numOUpdatesPerSec = 1000 / updateInterval;
+/// Decided to define these here so if we change the update
+/// interval we don't need to go through recalculating 
+/// the number of intervals
+int fiveSeconds = numOUpdatesPerSec * 5;
+int sixSeconds = numOUpdatesPerSec * 6;
+int elevenSeconds = numOUpdatesPerSec * 11;
+int twelveSeconds = numOUpdatesPerSec * 12;
 
 ObjModel car;
 ObjModel surveillanceCamera;
@@ -27,13 +35,6 @@ ObjModel surveillanceCamera;
 
 TrafficLight tLightNorthSouth;
 TrafficLight tLightEW;
-
-
-/// Traffic signals 
-Signal redSig = Red;
-Signal yellowSig = Yellow;
-Signal greenSig = Green;
-
 
 int carID; ///< Display List ID for car
 int surveillanceCameraID; ///< Display list ID for surveillance camera
@@ -44,7 +45,7 @@ Signal NS_Signal = Green;  ///< North-South signal.
 Signal WE_Signal = Red;  ///< West-East signal.
 
 Vector3 carPosition = { 3, 0, 45 }; ///< Car position with initial value.
-Vector3 carStartingPos = { 3, 0, 45 };
+Vector3 homePosition = carPosition; /// < Added a place for initial car location
 Vector3 localCarSpeed = { 0, 0, 0 }; ///< Car speed in car's local space.
 
 /// Played with a couple of different values for what the turn angle should be
@@ -55,12 +56,13 @@ double	turn = 2;
 
 Vector3 worldCarSpeed; ///< Car speed in world space.
 
+/// How much we should increase/decrease the car's local car speed
 double accelerate = .20;
 double decelerate = -0.2;
 
 float carDirection = 180;  ///< Car direction
 string carHeading = "N"; ///< String for car heading
-
+/// Adjusted offset to look like Dr. Shen screenshot.
 Vector3	localCameraOffset = { 0, 0, -6.5 };  ///< Third person camera offset in the car's local space.
 
 /// I had to setup the world camera offset otherwise when the camera 
@@ -193,9 +195,9 @@ void keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 		case 'r':
-			carPosition.x = carStartingPos.x;
-			carPosition.y = carStartingPos.y;
-			carPosition.z = carStartingPos.z;
+			carPosition.x = homePosition.x;
+			carPosition.y = homePosition.y;
+			carPosition.z = homePosition.z;
 			carDirection = 180;
 			carHeading = "N";
 			localCarSpeed.z = 0;
@@ -212,8 +214,10 @@ void keyboard(unsigned char key, int x, int y)
 	case 'b':
 		/// Add code for breaking.
 		/// Set the speed to 0 for the car.
-		localCarSpeed.x = localCarSpeed.z = 0;
-		worldCarSpeed.x = worldCarSpeed.z = 0;
+		localCarSpeed.x = 0;
+		localCarSpeed.z = 0;
+		worldCarSpeed.x = 0;
+		worldCarSpeed.z = 0;
 		break;
 	case 27:
 		exit(0);
@@ -273,8 +277,8 @@ void drawScene()
 	glScalef(1 / 3.28 / 12, 1 / 3.28 / 12, 1 / 3.28 / 12);
 	tLightNorthSouth.setSignal(NS_Signal);
 	tLightNorthSouth.Draw();
-
 	glPopMatrix();
+
 	glPushMatrix();
 	glTranslatef(-10, 0, 10);
 	glRotatef(-225, 0, 1, 0);
@@ -497,7 +501,6 @@ void init()
 	glColor3f(1, 1, 1);
 	for (int i = -10; i - 6 >= -1000; i -= 12)
 	{
-		/// East
 		glBegin(GL_POLYGON);
 			glVertex3f(i, .05, -5.1);
 			glVertex3f(i-3, .05, -5.1);
@@ -508,7 +511,6 @@ void init()
 
 	for (int i = -10; i - 6 >= -1000; i -= 12)
 	{
-		/// East
 		glBegin(GL_POLYGON);
 		glVertex3f(i, .05, 5.1);
 		glVertex3f(i - 3, .05, 5.1);
@@ -526,7 +528,6 @@ void init()
 	glColor3f(1, 1, 1);
 	for (int i = 10; i + 6 <= 1000; i += 12)
 	{
-		/// East
 		glBegin(GL_POLYGON);
 		glVertex3f(i, .05, -5.1);
 		glVertex3f(i + 3, .05, -5.1);
@@ -537,7 +538,6 @@ void init()
 
 	for (int i = 10; i + 6 <= 1000; i += 12)
 	{
-		/// East
 		glBegin(GL_POLYGON);
 		glVertex3f(i, .05, 5.1);
 		glVertex3f(i + 3, .05, 5.1);
@@ -568,8 +568,9 @@ void display()
 	stringstream ss;
 	ss << "Heading: " << carHeading << "  " << "Speed: ";
 
-	/// Seems like the car is going 10 times faster than it's local speed.
 	double speed; 
+	/// If we're going in reverse we not
+	/// really going negative mph
 	if (localCarSpeed.z < 0)
 		speed = localCarSpeed.z * -1;
 	else
@@ -651,27 +652,28 @@ void update()
 	carPosition.z += worldCarSpeed.z;
 
 	// State machine for the traffic signals using three variables: NS_Signal, WE_Signal, and counter.
-	// 3 to the counter since the clock seems a little slow.
+	// Add 3 to the counter since the clock seems a little slow.
 	counter += 3;
-	if (counter <= 250)
+	if (counter <= fiveSeconds)
 	{
-		NS_Signal = greenSig;
-		WE_Signal = redSig;
+		NS_Signal = Green;
+		WE_Signal = Red;
 	}
-	else if (counter > 250 && counter <= 300)
+	else if (counter > fiveSeconds && counter <= sixSeconds)
 	{
-		NS_Signal = yellowSig;
-		WE_Signal = redSig;
+		NS_Signal = Yellow;
+		WE_Signal = Red;
 	}
-	else if (counter > 300 && counter <= 600)
+	else if (counter > sixSeconds && counter <= twelveSeconds)
 	{
-		NS_Signal = redSig;
-		if (counter >550 && counter <= 600)
-			WE_Signal = yellowSig;
+		NS_Signal = Red;
+		if (counter > elevenSeconds && counter <= twelveSeconds)
+			WE_Signal = Yellow;
 		else
-			WE_Signal = greenSig;
+			WE_Signal = Green;
 	}
-	else if (counter > 600) {
+	else if (counter > twelveSeconds)
+	{
 		counter = 0;
 	}
 }
