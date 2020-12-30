@@ -1,0 +1,170 @@
+#include "TrafficLight.h"
+
+
+TrafficLight::TrafficLight(void)
+{
+}
+
+
+TrafficLight::~TrafficLight(void)
+{
+}
+
+void TrafficLight::setMaterials()
+{
+	// In this function, you are supposed to assign values to the variables redOn, redOff,
+	// yellowOn, yellowOff, greenOn, greenOff.
+	/// Set the values for turning red on.
+	/**********************************/
+	redOn.Ka[0] = 0.0;
+	redOn.Ka[1] = 0.0;
+	redOn.Ka[2] = 0.0;
+
+	redOn.Kd[0] = 1.0;
+	redOn.Kd[1] = 0.0;
+	redOn.Kd[2] = 0.0;
+
+	/// Keep these the same as the values
+	/// from the .mtl
+	redOn.Ks[0] = 0.33;
+	redOn.Ks[1] = 0.33;
+	redOn.Ks[2] = 0.33;
+
+	// Turn ambient on.
+	redOn.illum = 1;
+	redOn.d = 1.0;
+	/**********************************/
+
+
+	/// Set the values for turning red off.
+	/**********************************/
+	redOff.Ka[0] = 0.0;
+	redOff.Ka[1] = 0.0;
+	redOff.Ka[2] = 0.0;
+
+	redOff.Kd[0] = 0.0;
+	redOff.Kd[1] = 0.0;
+	redOff.Kd[2] = 0.0;
+
+	redOff.Ks[0] = 0.33;
+	redOff.Ks[1] = 0.33;
+	redOff.Ks[2] = 0.33;
+
+	redOff.illum = 0;
+	redOff.d = 1.0;
+	/**********************************/
+
+
+	/// Let's trun yellow on!
+	/**********************************/
+	yellowOn.Ka[0] = 0.0;
+	yellowOn.Ka[1] = 0.0;
+	yellowOn.Ka[2] = 0.0;
+
+	yellowOn.Kd[0] = 1.0;
+	yellowOn.Kd[1] = 1.0;
+	yellowOn.Kd[2] = 0.0;
+
+	yellowOn.Ks[0] = 0.33;
+	yellowOn.Ks[1] = 0.33;
+	yellowOn.Ks[2] = 0.33;
+
+	// Turn ambient on
+	yellowOn.illum = 1;
+	yellowOn.d = 1.0;
+	/**********************************/
+
+
+	/// Let's turn yellow off.
+	/**********************************/
+	yellowOff.Ka[0] = 0.0; 
+	yellowOff.Ka[1] = 0.0; 
+	yellowOff.Ka[2] = 0.0;
+
+	yellowOff.Kd[0] = 0.0; 
+	yellowOff.Kd[1] = 0.0; 
+	yellowOff.Kd[2] = 0.0;
+
+
+	yellowOff.Ks[0] = 0.33; 
+	yellowOff.Ks[1] = 0.33; 
+	yellowOff.Ks[2] = 0.33;
+
+	yellowOff.illum = 0; 
+	yellowOff.d		= 1.0;
+	/**********************************/
+
+
+
+	/// Assign value to greenOn
+	/**********************************/
+	greenOn.Ka[0] = 0.0;
+	greenOn.Ka[1] = 0.0;
+	greenOn.Ka[2] = 0.0;
+
+	greenOn.Kd[0] = 0.0;
+	greenOn.Kd[1] = 1.0;
+	greenOn.Kd[2] = 0.0;
+
+	/// Keep these the same as the values
+	/// from the .mtl
+	greenOn.Ks[0] = 0.33;
+	greenOn.Ks[1] = 0.33;
+	greenOn.Ks[2] = 0.33;
+	
+	// Turn ambient on but doesn't see to make 
+	// much of a difference.
+	greenOn.illum = 1;
+	greenOn.d = 1.0;
+	/**********************************/
+
+
+	/// Set the values for turnning green off.
+	/**********************************/
+	greenOff.Ka[0] = 0.0; 
+	greenOff.Ka[1] = 0.0; 
+	greenOff.Ka[2] = 0.0;
+
+	greenOff.Kd[0] = 0.0; 
+	greenOff.Kd[1] = 0.0; 
+	greenOff.Kd[2] = 0.0;
+
+	greenOff.Ks[0] = 0.33; 
+	greenOff.Ks[1] = 0.33; 
+	greenOff.Ks[2] = 0.33;
+
+	greenOff.illum = 0;
+	greenOff.d = 1.0;
+	/**********************************/
+
+}
+
+void TrafficLight::setSignal(Signal signal)
+{
+	// You are supposed to assign the materials used in the ObjModel class based on
+	// values of the input signal.
+	switch (signal)
+	{
+		case Red:
+			this->materials["_Red_"] = redOn;
+			this->materials["_Yellow_"] = yellowOff;
+			this->materials["_Green_"] = greenOff;
+			break;
+		case Yellow:
+			this->materials["_Red_"] = redOff;
+			this->materials["_Yellow_"] = yellowOn;
+			this->materials["_Green_"] = greenOff;
+			break;
+		case Green:
+			this->materials["_Red_"] = redOff;
+			this->materials["_Yellow_"] = yellowOff;
+			this->materials["_Green_"] = greenOn;
+			break;
+	}
+}
+
+void TrafficLight::ReadFile(string fileName)
+{
+	ObjModel::ReadFile(fileName);
+	setMaterials();
+}

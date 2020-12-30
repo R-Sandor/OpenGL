@@ -1,0 +1,5 @@
+<map id="timer" name="timer">
+<area shape="rect" id="node2" href="$main_8cpp.html#ac5c54df7ed3b930268c8d7752c101725" title="update" alt="" coords="137,5,198,32"/>
+<area shape="rect" id="node3" href="$glut_8h.html#a3a5b2c8df487b9894f40ba22ade02d4d" title="glutTimerFunc" alt="" coords="115,56,219,83"/>
+<area shape="rect" id="node4" href="$glut_8h.html#a4844b2228c60161628d1cd3b52d93a47" title="glutPostRedisplay" alt="" coords="104,107,231,133"/>
+</map>

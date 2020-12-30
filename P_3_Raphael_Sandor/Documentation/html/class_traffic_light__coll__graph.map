@@ -1,0 +1,5 @@
+<map id="TrafficLight" name="TrafficLight">
+<area shape="rect" id="node2" href="$class_obj_model.html" title="{ObjModel\n|# vertices\l# normals\l# textureCoords\l# mtlNames\l# materials\l# facesInMaterials\l# textures\l# faces\l# xmin\l# xmax\land 8 more...\l|+ ObjModel()\l+ ~ObjModel()\l+ ReadFile()\l+ Draw()\l+ GetVertices()\l+ GetNormals()\l+ GetFaces()\l+ GetMaterialNames()\l+ GetBoundingBox()\l+ SetDisplayMode()\l+ Reset()\l+ GetCenter()\l+ GetSize()\l# DrawMaterials()\l}" alt="" coords="5,219,156,633"/>
+<area shape="rect" id="node3" href="$struct_bounding_box.html" title="{BoundingBox\n|+ xmin\l+ xmax\l+ ymin\l+ ymax\l+ zmin\l+ zmax\l|}" alt="" coords="31,5,130,156"/>
+<area shape="rect" id="node4" href="$struct_material.html" title="{Material\n|+ Ka\l+ Kd\l+ Ks\l+ Ns\l+ d\l+ illum\l+ textureFileName\l|}" alt="" coords="180,343,309,509"/>
+</map>

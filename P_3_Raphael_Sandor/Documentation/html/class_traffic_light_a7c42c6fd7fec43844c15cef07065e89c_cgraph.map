@@ -1,0 +1,12 @@
+<map id="TrafficLight::ReadFile" name="TrafficLight::ReadFile">
+<area shape="rect" id="node2" href="$class_obj_model.html#a15f75341b7f4640fcbba625a2921d0a3" title="ObjModel::ReadFile" alt="" coords="209,132,345,159"/>
+<area shape="rect" id="node11" href="$class_traffic_light.html#a39b442ede2ab03b3c799469e8e9e929c" title="Initialize values of redOn, redOff, yellowOn, yellowOff, greenOn, and greenOff. " alt="" coords="196,183,359,209"/>
+<area shape="rect" id="node3" href="$class_obj_model.html#a7f49d82121d572bb050107b654784422" title="ObjModel::Reset" alt="" coords="420,5,539,32"/>
+<area shape="rect" id="node5" href="$glut_8h.html#a6f255d924f7a6bb2c4be0c8c2f2d9ce3" title="exit" alt="" coords="672,56,715,83"/>
+<area shape="rect" id="node6" href="$class_p_p_m_image.html#a15886ec2be7de17d5d175e28ce35e33e" title="PPMImage::ReadFile" alt="" coords="407,107,552,133"/>
+<area shape="rect" id="node8" href="$glew_8h.html#a99e77ebf136a8c511226cf705049a305" title="glGenTextures" alt="" coords="426,157,533,184"/>
+<area shape="rect" id="node9" href="$glew_8h.html#a940f58f3728713267a58e2d09ff602b2" title="glBindTexture" alt="" coords="429,208,530,235"/>
+<area shape="rect" id="node10" href="$glew_8h.html#aa95edbecc15f2cb8072b81af66d60f5b" title="glTexImage2D" alt="" coords="427,259,531,285"/>
+<area shape="rect" id="node4" href="$glew_8h.html#a2f5eccab2c3938a8c0c141035b4df47c" title="glDeleteTextures" alt="" coords="634,5,753,32"/>
+<area shape="rect" id="node7" href="$class_p_p_m_image.html#a1c5941179a52a24b21c9cbf3cf3d4e1d" title="PPMImage::CheckComment" alt="" coords="600,107,787,133"/>
+</map>

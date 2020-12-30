@@ -1,0 +1,8 @@
+<map id="glBlendFunc" name="glBlendFunc">
+<area shape="rect" id="node2" href="$class_obj_model.html#a1c8e2bdebcfdc68f09932d817f7bd567" title="ObjModel::DrawMaterials" alt="" coords="148,31,315,57"/>
+<area shape="rect" id="node3" href="$class_obj_model.html#a0388a82bb0d1e43674e50f803da54dab" title="ObjModel::Draw" alt="" coords="363,31,477,57"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a1dad859c998887477cd90323a027b8c6" title="Function to draw the entire scene. " alt="" coords="525,5,612,32"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947" title="init" alt="" coords="672,56,711,83"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a1e5b20fed15743656bb6d2e6a6ea6269" title="display" alt="" coords="660,5,723,32"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="771,31,821,57"/>
+</map>

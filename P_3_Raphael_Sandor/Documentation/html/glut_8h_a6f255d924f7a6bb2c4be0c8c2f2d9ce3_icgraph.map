@@ -1,0 +1,10 @@
+<map id="exit" name="exit">
+<area shape="rect" id="node2" href="$main_8cpp.html#aef7ba2f69afb2d954545f64c7fe24b14" title="keyboard" alt="" coords="321,5,396,32"/>
+<area shape="rect" id="node4" href="$class_obj_model.html#a15f75341b7f4640fcbba625a2921d0a3" title="ObjModel::ReadFile" alt="" coords="291,107,427,133"/>
+<area shape="rect" id="node6" href="$class_p_p_m_image.html#a15886ec2be7de17d5d175e28ce35e33e" title="PPMImage::ReadFile" alt="" coords="97,157,242,184"/>
+<area shape="rect" id="node9" href="$class_p_p_m_image.html#af96d1e8e6dff6e9e50f287d4b1fd0fbc" title="PPMImage::WriteFile" alt="" coords="96,56,243,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="665,81,716,108"/>
+<area shape="rect" id="node5" href="$class_traffic_light.html#a7c42c6fd7fec43844c15cef07065e89c" title="TrafficLight::ReadFile" alt="" coords="475,107,617,133"/>
+<area shape="rect" id="node7" href="$class_billboard.html#a4ca6ce31f226f77e33875487e9558297" title="Billboard::ReadFile" alt="" coords="293,157,424,184"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947" title="init" alt="" coords="527,157,565,184"/>
+</map>

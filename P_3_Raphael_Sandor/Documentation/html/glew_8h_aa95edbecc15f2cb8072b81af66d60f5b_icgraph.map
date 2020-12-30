@@ -1,0 +1,7 @@
+<map id="glTexImage2D" name="glTexImage2D">
+<area shape="rect" id="node2" href="$class_billboard.html#a4ca6ce31f226f77e33875487e9558297" title="Billboard::ReadFile" alt="" coords="160,5,291,32"/>
+<area shape="rect" id="node5" href="$class_obj_model.html#a15f75341b7f4640fcbba625a2921d0a3" title="ObjModel::ReadFile" alt="" coords="157,56,293,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947" title="init" alt="" coords="393,5,432,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="532,56,583,83"/>
+<area shape="rect" id="node6" href="$class_traffic_light.html#a7c42c6fd7fec43844c15cef07065e89c" title="TrafficLight::ReadFile" alt="" coords="341,107,484,133"/>
+</map>

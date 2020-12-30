@@ -1,0 +1,7 @@
+<map id="glDeleteTextures" name="glDeleteTextures">
+<area shape="rect" id="node2" href="$class_obj_model.html#a7f49d82121d572bb050107b654784422" title="ObjModel::Reset" alt="" coords="172,31,291,57"/>
+<area shape="rect" id="node3" href="$class_obj_model.html#a5e9ae322ffc17c5b44d411f1f4f6eab2" title="ObjModel::ObjModel" alt="" coords="339,5,479,32"/>
+<area shape="rect" id="node4" href="$class_obj_model.html#a15f75341b7f4640fcbba625a2921d0a3" title="ObjModel::ReadFile" alt="" coords="341,56,477,83"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="717,56,768,83"/>
+<area shape="rect" id="node6" href="$class_traffic_light.html#a7c42c6fd7fec43844c15cef07065e89c" title="TrafficLight::ReadFile" alt="" coords="527,81,669,108"/>
+</map>

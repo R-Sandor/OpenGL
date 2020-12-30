@@ -1,0 +1,37 @@
+<map id="init" name="init">
+<area shape="rect" id="node2" href="$glew_8h.html#af339551012daa99fef8c4d313e98b546" title="glClearColor" alt="" coords="127,31,219,57"/>
+<area shape="rect" id="node3" href="$glew_8h.html#a5e3f489d997350749919a24247a8203b" title="glPolygonMode" alt="" coords="118,81,229,108"/>
+<area shape="rect" id="node4" href="$glew_8h.html#adb2666717eedb30c430d1a371d897c76" title="glPixelStorei" alt="" coords="126,132,221,159"/>
+<area shape="rect" id="node5" href="$glew_8h.html#ac942c968c5084600e431332674d11d39" title="glLightfv" alt="" coords="139,183,207,209"/>
+<area shape="rect" id="node6" href="$glew_8h.html#aa4dfec46335156ad344fc8014018c267" title="glLightModeli" alt="" coords="124,233,223,260"/>
+<area shape="rect" id="node7" href="$glew_8h.html#aba0a48a87bac90bfe49861dc7362848e" title="glLightModelf" alt="" coords="124,284,223,311"/>
+<area shape="rect" id="node8" href="$glew_8h.html#af1e3a750be50d9edd85f0fe49a6fe4a0" title="glShadeModel" alt="" coords="121,335,225,361"/>
+<area shape="rect" id="node9" href="$glew_8h.html#a1beaf822e5a901dc3fe429b68efb77d4" title="glEnable" alt="" coords="554,284,626,311"/>
+<area shape="rect" id="node10" href="$glew_8h.html#a695a55175b5e79ab29946bcba8b16668" title="glGenLists" alt="" coords="131,791,215,817"/>
+<area shape="rect" id="node11" href="$glew_8h.html#a2255efdc1e7585c158d43eb670dde31b" title="glNewList" alt="" coords="134,841,213,868"/>
+<area shape="rect" id="node12" href="$class_obj_model.html#a0388a82bb0d1e43674e50f803da54dab" title="ObjModel::Draw" alt="" coords="116,537,231,564"/>
+<area shape="rect" id="node17" href="$glew_8h.html#acfd692f7e3361a218a542300f35ea816" title="glDisable" alt="" coords="553,335,627,361"/>
+<area shape="rect" id="node21" href="$glew_8h.html#a98964453975519f92d6cc59ef77f7436" title="glBegin" alt="" coords="557,689,623,716"/>
+<area shape="rect" id="node22" href="$glew_8h.html#acee7240272b34e83a4567a1fb586be99" title="glColor3f" alt="" coords="554,740,626,767"/>
+<area shape="rect" id="node25" href="$glew_8h.html#a9a95e17961303a80a5bf052b8c1cf677" title="glVertex3f" alt="" coords="550,791,630,817"/>
+<area shape="rect" id="node26" href="$glew_8h.html#abbff207d1fa71b296ff35b149cef7238" title="glEnd" alt="" coords="563,841,617,868"/>
+<area shape="rect" id="node27" href="$glew_8h.html#a9bd7233f539f4fd2000c5d5999f6c439" title="glEndList" alt="" coords="135,892,211,919"/>
+<area shape="rect" id="node28" href="$class_billboard.html#afdb4fa90b2a30aa56c69eb85117111e1" title="Billboard::SetOrientation" alt="" coords="92,943,255,969"/>
+<area shape="rect" id="node29" href="$class_billboard.html#a7ff549687dec5d9e67311f92157e18fb" title="Billboard::SetSize" alt="" coords="110,993,237,1020"/>
+<area shape="rect" id="node30" href="$class_billboard.html#a1fc4f1061122b36b7368422435f662b6" title="Billboard::SetLocation" alt="" coords="99,1044,248,1071"/>
+<area shape="rect" id="node31" href="$class_billboard.html#a4ca6ce31f226f77e33875487e9558297" title="Billboard::ReadFile" alt="" coords="321,157,451,184"/>
+<area shape="rect" id="node13" href="$class_obj_model.html#a1c8e2bdebcfdc68f09932d817f7bd567" title="ObjModel::DrawMaterials" alt="" coords="303,537,469,564"/>
+<area shape="rect" id="node14" href="$glew_8h.html#a940f58f3728713267a58e2d09ff602b2" title="glBindTexture" alt="" coords="539,233,641,260"/>
+<area shape="rect" id="node15" href="$glew_8h.html#ac8dbabff536e520bc700960dadd8d787" title="glTexParameteri" alt="" coords="532,183,648,209"/>
+<area shape="rect" id="node16" href="$glew_8h.html#aef002569ef87edd0dfbd47788cf79994" title="glTexEnvf" alt="" coords="551,537,629,564"/>
+<area shape="rect" id="node18" href="$glew_8h.html#a598f8ff6c7caf0dc3f52c437a27a1426" title="glMaterialfv" alt="" coords="547,588,633,615"/>
+<area shape="rect" id="node19" href="$glew_8h.html#a8e13e72c3a7bac1f4685fcf3d32bf98c" title="glBlendFunc" alt="" coords="543,639,637,665"/>
+<area shape="rect" id="node20" href="$glew_8h.html#a44edf608613acc70b5a5378a369bfae9" title="glMaterialf" alt="" coords="549,385,631,412"/>
+<area shape="rect" id="node23" href="$glew_8h.html#a921a9cbeeca45725bc6be5db6a59679c" title="glNormal3f" alt="" coords="549,436,631,463"/>
+<area shape="rect" id="node24" href="$glew_8h.html#a09db6f9fa0d39ef7e3919e6212296ece" title="glTexCoord2f" alt="" coords="541,487,639,513"/>
+<area shape="rect" id="node32" href="$class_p_p_m_image.html#a15886ec2be7de17d5d175e28ce35e33e" title="PPMImage::ReadFile" alt="" coords="517,31,663,57"/>
+<area shape="rect" id="node35" href="$glew_8h.html#a99e77ebf136a8c511226cf705049a305" title="glGenTextures" alt="" coords="537,81,643,108"/>
+<area shape="rect" id="node36" href="$glew_8h.html#aa95edbecc15f2cb8072b81af66d60f5b" title="glTexImage2D" alt="" coords="538,132,642,159"/>
+<area shape="rect" id="node33" href="$glut_8h.html#a6f255d924f7a6bb2c4be0c8c2f2d9ce3" title="exit" alt="" coords="783,5,825,32"/>
+<area shape="rect" id="node34" href="$class_p_p_m_image.html#a1c5941179a52a24b21c9cbf3cf3d4e1d" title="PPMImage::CheckComment" alt="" coords="711,56,897,83"/>
+</map>

@@ -1,0 +1,3 @@
+<map id="TrafficLight" name="TrafficLight">
+<area shape="rect" id="node2" href="$class_obj_model.html" title="{ObjModel\n|# vertices\l# normals\l# textureCoords\l# mtlNames\l# materials\l# facesInMaterials\l# textures\l# faces\l# bb\l# xmin\land 9 more...\l|+ ObjModel()\l+ ~ObjModel()\l+ ReadFile()\l+ Draw()\l+ GetVertices()\l+ GetNormals()\l+ GetFaces()\l+ GetMaterialNames()\l+ GetBoundingBox()\l+ SetDisplayMode()\l+ Reset()\l+ GetCenter()\l+ GetSize()\l# DrawMaterials()\l}" alt="" coords="5,5,156,420"/>
+</map>

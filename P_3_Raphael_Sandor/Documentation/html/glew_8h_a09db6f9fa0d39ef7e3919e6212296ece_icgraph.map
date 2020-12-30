@@ -1,0 +1,9 @@
+<map id="glTexCoord2f" name="glTexCoord2f">
+<area shape="rect" id="node2" href="$class_billboard.html#a70f3160e85f4061465be761e427ba728" title="Billboard::Draw" alt="" coords="368,5,477,32"/>
+<area shape="rect" id="node6" href="$class_obj_model.html#a1c8e2bdebcfdc68f09932d817f7bd567" title="ObjModel::DrawMaterials" alt="" coords="151,56,317,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a1dad859c998887477cd90323a027b8c6" title="Function to draw the entire scene. " alt="" coords="528,5,615,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a1e5b20fed15743656bb6d2e6a6ea6269" title="display" alt="" coords="663,5,725,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="773,31,824,57"/>
+<area shape="rect" id="node7" href="$class_obj_model.html#a0388a82bb0d1e43674e50f803da54dab" title="ObjModel::Draw" alt="" coords="365,56,480,83"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947" title="init" alt="" coords="675,56,713,83"/>
+</map>

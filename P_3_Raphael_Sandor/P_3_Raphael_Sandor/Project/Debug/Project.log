@@ -1,0 +1,13 @@
+﻿  main.cpp
+  ObjModel.cpp
+D:\Documents\Courses\ODU\MSIM 641\2020\Fall\Programming Assignments\P2\Transportation - Base\Project\Project\src\ObjModel.cpp(250,20): warning C4018: '<': signed/unsigned mismatch
+D:\Documents\Courses\ODU\MSIM 641\2020\Fall\Programming Assignments\P2\Transportation - Base\Project\Project\src\ObjModel.cpp(303,20): warning C4018: '<': signed/unsigned mismatch
+D:\Documents\Courses\ODU\MSIM 641\2020\Fall\Programming Assignments\P2\Transportation - Base\Project\Project\src\ObjModel.cpp(349,20): warning C4018: '<': signed/unsigned mismatch
+D:\Documents\Courses\ODU\MSIM 641\2020\Fall\Programming Assignments\P2\Transportation - Base\Project\Project\src\ObjModel.cpp(352,20): warning C4018: '<': signed/unsigned mismatch
+  PPMImage.cpp
+  TrafficLight.cpp
+  utility.cpp
+D:\Documents\Courses\ODU\MSIM 641\2020\Fall\Programming Assignments\P2\Transportation - Base\Project\Project\src\utility.cpp(5,20): warning C4018: '<': signed/unsigned mismatch
+D:\Documents\Courses\ODU\MSIM 641\2020\Fall\Programming Assignments\P2\Transportation - Base\Project\Project\src\utility.cpp(11,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Project.vcxproj -> D:\Documents\Courses\ODU\MSIM 641\2020\Fall\Programming Assignments\P2\Transportation - Base\Project\Project\.\bin\Project.exe

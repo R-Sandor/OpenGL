@@ -1,0 +1,12 @@
+<map id="glBindTexture" name="glBindTexture">
+<area shape="rect" id="node2" href="$class_billboard.html#a4ca6ce31f226f77e33875487e9558297" title="Billboard::ReadFile" alt="" coords="369,5,500,32"/>
+<area shape="rect" id="node5" href="$class_billboard.html#a70f3160e85f4061465be761e427ba728" title="Billboard::Draw" alt="" coords="183,107,293,133"/>
+<area shape="rect" id="node8" href="$class_obj_model.html#a15f75341b7f4640fcbba625a2921d0a3" title="ObjModel::ReadFile" alt="" coords="548,157,684,184"/>
+<area shape="rect" id="node10" href="$class_obj_model.html#a1c8e2bdebcfdc68f09932d817f7bd567" title="ObjModel::DrawMaterials" alt="" coords="155,56,321,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947" title="init" alt="" coords="597,31,635,57"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="923,107,973,133"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a1dad859c998887477cd90323a027b8c6" title="Function to draw the entire scene. " alt="" coords="573,81,659,108"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a1e5b20fed15743656bb6d2e6a6ea6269" title="display" alt="" coords="772,81,835,108"/>
+<area shape="rect" id="node9" href="$class_traffic_light.html#a7c42c6fd7fec43844c15cef07065e89c" title="TrafficLight::ReadFile" alt="" coords="732,183,875,209"/>
+<area shape="rect" id="node11" href="$class_obj_model.html#a0388a82bb0d1e43674e50f803da54dab" title="ObjModel::Draw" alt="" coords="377,56,492,83"/>
+</map>
